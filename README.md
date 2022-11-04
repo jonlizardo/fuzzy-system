@@ -1,3 +1,17 @@
+### About the task
+Hi ! :wave:
+I understand the task was meant to be delivered using Scala. However, due to the limited time I have, and spent some time trying to learn and figure out the language, I opted for this solution.
+
+Instead, I am submitting my code using Python. The goal is that you have an idea of my coding skills, which I believe is better than sending nothing or something I'm not happy with.
+
+Having dedicated part of the time I had to Scala, didn't allow me to spend as much as I would have liked in the Python solution either, but I'm happier with this than I was with the Scala sketches I never manage to make work.
+
+I hope you understand.
+
+Have a good day !
+
+Miguel
+
 ### Setup
 Install poetry
 ```
