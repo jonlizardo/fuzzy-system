@@ -8,12 +8,12 @@ from core.utils import DateFilter
 
 class Flight:
     def __init__(
-            self,
-            flight_id: str,
-            from_: str,
-            to_: str,
-            date: dt.date,
-            passengers: List[str],
+        self,
+        flight_id: str,
+        from_: str,
+        to_: str,
+        date: dt.date,
+        passengers: List[str],
     ):
         self.flight_id = flight_id
         self.from_ = from_
@@ -32,8 +32,7 @@ class Flight:
         reserved = ['to', 'from']
         kwargs = {
             utils.camel_to_snake(k) + ('_' if k in reserved else ''): v
-            for k, v
-            in records[0].items()
+            for k, v in records[0].items()
         }
         kwargs['date'] = dt.datetime.strptime(kwargs.pop('date'), '%Y-%m-%d')
         kwargs.pop('passenger_id')

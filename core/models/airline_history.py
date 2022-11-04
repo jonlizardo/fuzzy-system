@@ -20,7 +20,8 @@ class AirlineHistory:
 
     @staticmethod
     def _get_flights_from_csv(
-            reader: CSVReader, path_to_flights: Path,
+        reader: CSVReader,
+        path_to_flights: Path,
     ) -> List[Flight]:
         flights_data = reader.read_group_by(path_to_flights, 'flightId')
         return [
@@ -29,12 +30,11 @@ class AirlineHistory:
 
     @staticmethod
     def _get_pax_from_csv(
-            reader: CSVReader, path_to_passenger: Path,
+        reader: CSVReader,
+        path_to_passenger: Path,
     ) -> List[Passenger]:
         pax_data = reader.read_group_by(path_to_passenger, 'passengerId')
-        return [
-            Passenger.from_csv_record(p[0]) for _, p in pax_data.items()
-        ]
+        return [Passenger.from_csv_record(p[0]) for _, p in pax_data.items()]
 
     @classmethod
     def from_csv(cls, path_to_flights: Path, path_to_passenger: Path):
@@ -54,8 +54,7 @@ class AirlineHistory:
                 )
         return [
             PassengerFlight(pax, flights=flights_by_pax.get(pax.passenger_id))
-            for pax
-            in self.passengers
+            for pax in self.passengers
         ]
 
     def monthly_flights(self):
@@ -73,8 +72,7 @@ class AirlineHistory:
     def longest_run(self, to_exclude: List[str]):
         all_runs = {
             pax.passenger.passenger_id: pax.countries_visited(to_exclude)
-            for pax
-            in self.passenger_flights
+            for pax in self.passenger_flights
         }
         longest = max(all_runs.values())
         longest_run_pax = {k: v for k, v in all_runs.items() if v == longest}
@@ -85,13 +83,15 @@ class AirlineHistory:
         for pax in self.passenger_flights:
             shares += [
                 FlightShared(pax.passenger.passenger_id, other, flights)
-                for other, flights
-                in pax.shared_with(filter_).items()
+                for other, flights in pax.shared_with(filter_).items()
             ]
         return shares
 
     def most_flown_together(
-            self, min_: int, filter_: DateFilter = None, top: int = 5,
+        self,
+        min_: int,
+        filter_: DateFilter = None,
+        top: int = 5,
     ) -> List:
         results = [
             s.to_dict()

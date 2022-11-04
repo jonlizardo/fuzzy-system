@@ -37,7 +37,9 @@ class CSVReader:
             yield from reader
 
     def read_group_by(
-            self, path: Path, key: str,
+        self,
+        path: Path,
+        key: str,
     ) -> Dict[Any, List[Dict[str, Any]]]:
         """Reads CSV and returns all records grouped by a given key"""
         grouped_by = defaultdict(list)

@@ -6,10 +6,10 @@ from core import utils
 
 class Passenger:
     def __init__(
-            self,
-            passenger_id: str,
-            first_name: str,
-            last_name: str,
+        self,
+        passenger_id: str,
+        first_name: str,
+        last_name: str,
     ):
         self.passenger_id = passenger_id
         self.first_name = first_name

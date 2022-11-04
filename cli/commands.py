@@ -15,7 +15,8 @@ def quantexa(ctx, path):
     path_to_flights = folder / 'flightData.csv'
     path_to_passengers = folder / 'passengers.csv'
     airline = AirlineHistory.from_csv(
-        path_to_flights=path_to_flights, path_to_passenger=path_to_passengers,
+        path_to_flights=path_to_flights,
+        path_to_passenger=path_to_passengers,
     )
     ctx.obj = airline
 
