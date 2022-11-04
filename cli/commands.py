@@ -15,7 +15,7 @@ def quantexa(ctx, path):
     path_to_flights = folder / 'flightData.csv'
     path_to_passengers = folder / 'passengers.csv'
     airline = AirlineHistory.from_csv(
-        path_to_flights=path_to_flights, path_to_passenger=path_to_passengers
+        path_to_flights=path_to_flights, path_to_passenger=path_to_passengers,
     )
     ctx.obj = airline
 
@@ -27,23 +27,23 @@ def monthly_flights(airline):
 
 
 @quantexa.command()
-@click.option("-t", "--top", type=int, default=10)
+@click.option('-t', '--top', type=int, default=10)
 @click.pass_obj
 def frequent_flyers(airline, top):
     utils.printer(airline.monthly_flights(top))
 
 
 @quantexa.command()
-@click.option("-x", "--exclude", type=str, multiple=True)
+@click.option('-x', '--exclude', type=str, multiple=True)
 @click.pass_obj
 def longest_run(airline, exclude):
     utils.printer(airline.longest_run(to_exclude=exclude))
 
 
 @quantexa.command()
-@click.option("-m", "--min-shared", type=int, default=1)
-@click.option("-d", "--dates", type=(str, str))
-@click.option("-t", "--top", type=int, default=10)
+@click.option('-m', '--min-shared', type=int, default=1)
+@click.option('-d', '--dates', type=(str, str))
+@click.option('-t', '--top', type=int, default=10)
 @click.pass_obj
 def most_flown_together(airline, min_shared, dates, top):
     filter_ = DateFilter.from_str(*dates) if dates else None

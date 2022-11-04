@@ -2,6 +2,7 @@ import click
 
 from cli.commands import quantexa
 
+
 @click.group()
 def interpreter():
     pass

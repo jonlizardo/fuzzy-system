@@ -1,6 +1,6 @@
 import datetime as dt
-
-from typing import Dict, List
+from typing import Dict
+from typing import List
 
 from core import utils
 from core.utils import DateFilter
@@ -13,7 +13,7 @@ class Flight:
             from_: str,
             to_: str,
             date: dt.date,
-            passengers: List[str]
+            passengers: List[str],
     ):
         self.flight_id = flight_id
         self.from_ = from_

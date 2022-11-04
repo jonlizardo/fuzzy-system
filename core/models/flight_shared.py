@@ -16,7 +16,7 @@ class FlightShared:
             'Pax 2': self.other_pax,
             'Total shared': self.total_shared,
             'First flight': min(self.flights),
-            'Last flight': max(self.flights)
+            'Last flight': max(self.flights),
         }
 
     def __repr__(self):
@@ -24,7 +24,7 @@ class FlightShared:
 
     def __eq__(self, other):
         return self.main_pax == other.main_pax \
-               and self.other_pax == other.other_pax
+            and self.other_pax == other.other_pax
 
     def __hash__(self):
         return hash((self.main_pax, self.other_pax))

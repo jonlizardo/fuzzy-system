@@ -1,10 +1,11 @@
 import datetime as dt
 import re
-
 from collections import defaultdict
-
 from pathlib import Path
-from typing import Any, Dict, List, Iterator
+from typing import Any
+from typing import Dict
+from typing import Iterator
+from typing import List
 
 
 def camel_to_snake(s: str) -> str:
@@ -17,7 +18,7 @@ class CSVReader:
         self.separator = separator
 
     def _read(self, path: Path) -> Iterator[List[Any]]:
-        with open(path, 'r') as csv:
+        with open(path) as csv:
             for row in csv:
                 row = row.replace('\n', '')
                 yield row.split(self.separator)
@@ -36,7 +37,7 @@ class CSVReader:
             yield from reader
 
     def read_group_by(
-            self, path: Path, key: str
+            self, path: Path, key: str,
     ) -> Dict[Any, List[Dict[str, Any]]]:
         """Reads CSV and returns all records grouped by a given key"""
         grouped_by = defaultdict(list)
@@ -57,10 +58,10 @@ class DateFilter:
         return f'{self.start} - {self.end}'
 
     @classmethod
-    def from_str(cls, start_str: str, end_str: str, format_: str = "%Y-%m-%d"):
+    def from_str(cls, start_str: str, end_str: str, format_: str = '%Y-%m-%d'):
         return cls(
             dt.datetime.strptime(start_str, format_),
-            dt.datetime.strptime(end_str, format_)
+            dt.datetime.strptime(end_str, format_),
         )
 
 

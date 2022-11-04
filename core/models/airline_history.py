@@ -1,12 +1,14 @@
-from collections import defaultdict, Counter
+from collections import Counter
+from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import List
 
 from core.models.flight import Flight
 from core.models.flight_shared import FlightShared
 from core.models.passenger import Passenger
 from core.models.passenger_flight import PassengerFlight
-from core.utils import CSVReader, DateFilter
+from core.utils import CSVReader
+from core.utils import DateFilter
 
 
 class AirlineHistory:
@@ -18,7 +20,7 @@ class AirlineHistory:
 
     @staticmethod
     def _get_flights_from_csv(
-            reader: CSVReader, path_to_flights: Path
+            reader: CSVReader, path_to_flights: Path,
     ) -> List[Flight]:
         flights_data = reader.read_group_by(path_to_flights, 'flightId')
         return [
@@ -27,7 +29,7 @@ class AirlineHistory:
 
     @staticmethod
     def _get_pax_from_csv(
-            reader: CSVReader, path_to_passenger: Path
+            reader: CSVReader, path_to_passenger: Path,
     ) -> List[Passenger]:
         pax_data = reader.read_group_by(path_to_passenger, 'passengerId')
         return [
@@ -48,7 +50,7 @@ class AirlineHistory:
         for flight in self.flights:
             for pax in flight.passengers:
                 flights_by_pax[pax].append(
-                    self._flights_by_id.get(flight.flight_id)
+                    self._flights_by_id.get(flight.flight_id),
                 )
         return [
             PassengerFlight(pax, flights=flights_by_pax.get(pax.passenger_id))
@@ -89,7 +91,7 @@ class AirlineHistory:
         return shares
 
     def most_flown_together(
-            self, min_: int, filter_: DateFilter = None, top: int = 5
+            self, min_: int, filter_: DateFilter = None, top: int = 5,
     ) -> List:
         results = [
             s.to_dict()

@@ -1,4 +1,5 @@
-from typing import Any, Dict
+from typing import Any
+from typing import Dict
 
 from core import utils
 
@@ -26,5 +27,5 @@ class Passenger:
         return {
             'Passenger ID': self.passenger_id,
             'First name': self.first_name,
-            'Last name': self.last_name
+            'Last name': self.last_name,
         }

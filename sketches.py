@@ -11,5 +11,3 @@ print(airline.monthly_flights())
 print(airline.frequent_flyers(3))
 print(airline.longest_run('uk'))
 print(airline.most_flown_together(min_=3))
-
-

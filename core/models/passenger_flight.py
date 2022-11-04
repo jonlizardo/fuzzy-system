@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import Dict, List
+from typing import Dict
+from typing import List
 
 from core.models.flight import Flight
 from core.models.passenger import Passenger
@@ -27,7 +28,8 @@ class PassengerFlight:
 
     def to_dict(self):
         return {
-            **self.passenger.to_dict(), 'Number of flights': self.total_flights
+            **self.passenger.to_dict(),
+            'Number of flights': self.total_flights,
         }
 
     def countries_visited(self, exclude: List[str]) -> int:
@@ -35,7 +37,7 @@ class PassengerFlight:
         return len([c for c in self.visits_by_country if c not in exclude_])
 
     def shared_with(
-            self, filter_: DateFilter = None
+            self, filter_: DateFilter = None,
     ) -> Dict[str, List[Flight]]:
         if filter_ is not None:
             flights = filter(lambda f: f.within_range(filter_), self.flights)
