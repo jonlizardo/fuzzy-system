@@ -11,6 +11,8 @@ from core.utils import DateFilter
 @click.option('-p', '--path', type=click.Path())
 @click.pass_context
 def quantexa(ctx, path):
+    """Make sure your path includes the folder with flightData.csv and
+    passengers.csv"""
     folder = Path(path)
     path_to_flights = folder / 'flightData.csv'
     path_to_passengers = folder / 'passengers.csv'

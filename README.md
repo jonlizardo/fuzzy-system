@@ -28,6 +28,8 @@ poetry install
 Use the CLI to run the tasks, make sure you add `poetry run` at the beginning.
 All task also require of a `--path` parameter to indicate the folder where both .csv are located. Assuming the names are still the same.
 
+:exclamation: Please note that you can always use the `--help` to learn more about the commands.
+
 #### Monthly flights
 ```
 poetry run python app.py quantexa --path ~/path/to/files monthly-flights
