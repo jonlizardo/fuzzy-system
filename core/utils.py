@@ -6,6 +6,9 @@ from typing import Any
 from typing import Dict
 from typing import Iterator
 from typing import List
+from typing import Union
+
+from core.exceptions import PrinterDataTypeError
 
 
 def camel_to_snake(s: str) -> str:
@@ -50,11 +53,11 @@ class CSVReader:
 
 class DateFilter:
     def __init__(self, start: dt.date, end: dt.date):
-        self.start = start
-        self.end = end
+        self.start = min(start, end)
+        self.end = max(start, end)
 
     def check(self, d: dt.date) -> bool:
-        return self.start < d < self.end
+        return self.start <= d <= self.end
 
     def __repr__(self):
         return f'{self.start} - {self.end}'
@@ -62,14 +65,19 @@ class DateFilter:
     @classmethod
     def from_str(cls, start_str: str, end_str: str, format_: str = '%Y-%m-%d'):
         return cls(
-            dt.datetime.strptime(start_str, format_),
-            dt.datetime.strptime(end_str, format_),
+            dt.datetime.strptime(start_str, format_).date(),
+            dt.datetime.strptime(end_str, format_).date(),
         )
 
+    def __eq__(self, other):
+        return self.start == other.start and self.end == other.end
 
-def printer(data):
+
+def printer(data: Union[List, Dict]):
     if isinstance(data, list):
         for i in data:
             print(i)
-    else:
+    elif isinstance(data, dict):
         print(data)
+    else:
+        raise PrinterDataTypeError(data)
