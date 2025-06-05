@@ -10,7 +10,7 @@ I hope you understand.
 
 Have a good day !
 
-Miguel
+Jonathan
 
 ### Setup
 Install poetry
